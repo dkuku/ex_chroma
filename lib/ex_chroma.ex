@@ -13,9 +13,12 @@ defmodule ExChroma do
   def rgb2hex({r, g, b, a}) when a == 1 or a == 1.0 do
     Base.encode16(<<r>>) <> Base.encode16(<<g>>) <> Base.encode16(<<b>>)
   end
+
   def rgb2hex({r, g, b, a}) do
-    Base.encode16(<<r>>) <> Base.encode16(<<g>>) <> Base.encode16(<<b>>) <> Base.encode16(<<round(a * 255)>>)
+    Base.encode16(<<r>>) <>
+      Base.encode16(<<g>>) <> Base.encode16(<<b>>) <> Base.encode16(<<round(a * 255)>>)
   end
+
   @doc """
   Colors are stored in a tuple as
   {R, G, B, A}
@@ -62,6 +65,6 @@ defmodule ExChroma do
   end
 
   defp hex_to_alpha(hex) do
-    hex_to_int(hex) / 255 |> Float.round(2)
+    (hex_to_int(hex) / 255) |> Float.round(2)
   end
 end
