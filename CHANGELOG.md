@@ -9,3 +9,9 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 
 
+
+### Features:
+
+* parser: add import of rgb(x,x,x) and rgba(x,x,x,x)
+
+* parser: hex parser
