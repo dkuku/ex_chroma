@@ -1,5 +1,6 @@
 defmodule ExChroma.CmykTest do
   use ExUnit.Case, async: true
+  doctest ExChroma.Cmyk
 
   alias ExChroma.Cmyk
 

@@ -1,5 +1,6 @@
 defmodule ExChroma.Cmyk do
   @moduledoc """
+
   The CMYK color model (also known as process color, or four color)
   is a subtractive color model, based on the CMY color model, used in color printing,
   and is also used to describe the printing process itself.
@@ -11,8 +12,9 @@ defmodule ExChroma.Cmyk do
   @cmyk_scale 1.0
 
   @doc """
-  iex()> ExChroma.Cmyk.from_rgb({1, 255, 255, _})
-  {1, 0, 0, 0}
+
+  iex> ExChroma.Cmyk.from_rgb({1, 255, 255, 1})
+  {1.0, 0.0, 0.0, 0.0}
   """
   def from_rgb({0, 0, 0, _a} = _black) do
     {0.0, 0.0, 0.0, 1.0}
@@ -22,7 +24,7 @@ defmodule ExChroma.Cmyk do
     {0.0, 0.0, 0.0, 1.0}
   end
 
-  def from_rgb({r, g, b, _a} = c) do
+  def from_rgb({r, g, b, _a}) do
     # rgb [0,255] -> cmy [0,1]
     c = 1 - r / @rgb_scale
     m = 1 - b / @rgb_scale

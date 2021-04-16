@@ -1,5 +1,9 @@
 defmodule ExChroma.Hex do
+  alias ExChroma.{Hex, Rgba}
+
+  @type t :: String.t() 
   @moduledoc """
+
   # A hex triplet
 
   A hex triplet is a six-digit, three-byte hexadecimal number used in HTML, CSS, SVG,
@@ -35,11 +39,13 @@ defmodule ExChroma.Hex do
   09C becomes 0099CC
   """
   @doc """
-  iex()> ExChroma.from_rgb({50, 50, 50, 1})
-  "323232"
-  iex()> ExChroma.from_rgb({50, 50, 50, 0.5})
-  "32323280"
+
+    iex> ExChroma.Hex.from_rgb({50, 50, 50, 1})
+    "323232"
+    iex> ExChroma.Hex.from_rgb({50, 50, 50, 0.5})
+    "32323280"
   """
+  @spec from_rgb(ExChroma.Rgba.t()) :: ExChroma.Hex.t()
   def from_rgb({r, g, b, a}) when a == 1 or a == 1.0 do
     Base.encode16(<<r>>) <> Base.encode16(<<g>>) <> Base.encode16(<<b>>)
   end
@@ -50,28 +56,31 @@ defmodule ExChroma.Hex do
   end
 
   @doc """
+
   Colors are stored in a tuple as
+
   {R, G, B, A}
   allowed types are:
 
-  iex()> ExChroma.to_rgb("#ABC")
+  iex> ExChroma.Hex.to_rgb("#ABC")
   {170, 187, 204, 1}
-  iex()> ExChroma.to_rgb("#ABCD")
+  iex> ExChroma.Hex.to_rgb("#ABCD")
   {170, 187, 204, 0.87}
-  iex()> ExChroma.to_rgb("#ABCDEF")
+  iex> ExChroma.Hex.to_rgb("#ABCDEF")
   {171, 205, 239, 1}
-  iex()> ExChroma.to_rgb("#ABCDEF12")
+  iex> ExChroma.Hex.to_rgb("#ABCDEF12")
   {171, 205, 239, 0.07}
-  iex()> ExChroma.to_rgb("123") 
+  iex> ExChroma.Hex.to_rgb("123") 
   {17, 34, 51, 1}
-  iex()> ExChroma.to_rgb("1234")
+  iex> ExChroma.Hex.to_rgb("1234")
   {17, 34, 51, 0.27}
-  iex()> ExChroma.to_rgb("123456")
+  iex> ExChroma.Hex.to_rgb("123456")
   {18, 52, 86, 1}
-  iex()> ExChroma.to_rgb("12345678")
+  iex> ExChroma.Hex.to_rgb("12345678")
   {18, 52, 86, 0.47}
   """
 
+  @spec from_rgb(ExChroma.Hex.t()) :: ExChroma.Rgba.t()
   def to_rgb("#" <> hex_code), do: to_rgb(hex_code)
 
   def to_rgb(<<r::binary-size(1), g::binary-size(1), b::binary-size(1)>>) do

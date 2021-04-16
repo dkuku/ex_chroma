@@ -1,5 +1,6 @@
 defmodule ExChroma.HexTest do
   use ExUnit.Case, async: true
+  doctest ExChroma.Hex
 
   alias ExChroma.Hex
 
